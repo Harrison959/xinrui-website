@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="新锐创想，以武汉各大大学城为中心，为学车人群提供区域驾校选择、实地看场与片区负责人咨询服务。" />
+  <meta name="theme-color" content="#050b13" />
+  <title>新锐创想｜武汉大学城驾校服务平台</title>
+  <link rel="icon" type="image/png" href="assets/images/xinrui-logo-transparent-v1.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="intro-active">
+  <div class="intro" id="intro" aria-label="新锐创想品牌开场">
+    <div class="intro-noise"></div>
+    <div class="intro-grid"></div>
+    <div class="intro-orbit orbit-a"></div>
+    <div class="intro-orbit orbit-b"></div>
+    <div class="intro-corner top-left">WUHAN · CHINA<br />30.5928° N / 114.3055° E</div>
+    <div class="intro-corner top-right"><span></span> DRIVING SERVICE NETWORK</div>
+    <div class="intro-stage">
+      <img class="intro-logo" src="assets/images/xinrui-logo-transparent-v1.png" alt="" />
+      <div class="intro-line"><i></i><small>EST. 2026</small></div>
+      <h1 class="intro-wordmark" aria-label="新锐创想">
+        <span style="--i:0">新</span><span style="--i:1">锐</span><span style="--i:2">创</span><span style="--i:3">想</span>
+      </h1>
+      <div class="intro-english"><span>XINRUI</span><i></i><span>CREATIVE</span></div>
+      <p>以区域为坐标，让每一次学车选择更清晰。</p>
+      <button class="enter-button" id="enterSite">
+        <span class="enter-ring"><i>↗</i></span>
+        <span><b>点击进入</b><small>ENTER EXPERIENCE</small></span>
+      </button>
+    </div>
+    <div class="intro-index">01 <span>/</span> 01</div>
+    <button class="skip-intro" id="skipIntro">跳过动画 SKIP</button>
+  </div>
+
+  <div class="site" id="site">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="新锐创想首页">
+        <img class="brand-logo" src="assets/images/xinrui-logo-transparent-v1.png" alt="" />
+        <span class="brand-copy"><b>新锐创想</b><small>XINRUI CREATIVE</small></span>
+      </a>
+      <nav aria-label="主导航">
+        <a class="active" href="#home">首页</a>
+        <button id="navOpenAreas" type="button">服务片区</button>
+        <span>武汉驾校服务网络</span>
+      </nav>
+      <button class="consult-button" id="headerConsult" type="button"><span></span> 联系片区负责人 <i>↗</i></button>
+      <button class="menu-button" aria-label="打开菜单"><i></i><i></i></button>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-grid"></div>
+        <div class="hero-copy">
+          <div class="section-label"><span>01</span><i></i> WUHAN DRIVING NETWORK</div>
+          <h1>武汉学车，<br />从<span>大学城</span>出发。</h1>
+          <p>以大学城为中心，辐射周边正规合作驾校。真实场地可看，专属片区负责人为你提供选校与报名服务。</p>
+          <div class="hero-actions">
+            <button class="primary-action" id="enterCurrentZone" type="button">选择服务片区 <i>↗</i></button>
+            <button class="play-action"><span>▶</span> 了解新锐服务</button>
+          </div>
+          <div class="hero-metrics">
+            <div><b>07</b><span>已开展服务片区<br />ACTIVE AREAS</span></div>
+            <div><b>08</b><span>合作驾校品牌<br />PARTNER SCHOOLS</span></div>
+            <div><b>45</b><span>周边高校覆盖<br />CAMPUS COVERAGE</span></div>
+          </div>
+        </div>
+
+        <div class="map-panel" aria-label="武汉大学城服务地图">
+          <div class="map-meta top"><span>WUHAN SERVICE MAP</span><span>LIVE · 07 ACTIVE / 02 PLANNED</span></div>
+          <svg class="wuhan-map" viewBox="0 0 680 600" role="img" aria-label="武汉大学城抽象地图">
+            <defs>
+              <linearGradient id="river" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#163a57"/><stop offset="1" stop-color="#071624"/></linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <path class="map-land" d="M117 93c78-44 143-35 203 3 49 31 90 17 139 16 70-1 133 30 144 92 12 66-32 107-57 153-26 48-23 102-68 140-54 46-114 17-168 7-67-13-118 35-174 4-50-28-39-94-54-141-14-46-53-78-42-133 9-51 34-114 77-141z"/>
+            <path class="river" d="M35 241c86-16 144-2 213 31 68 33 133 17 194-18 64-37 129-44 209-22l4 69c-75-22-133-14-191 20-72 42-155 61-244 19-61-29-111-43-180-28z" fill="url(#river)"/>
+            <path class="river-line" d="M38 272c79-13 132 1 196 31 75 36 142 19 214-21 60-34 123-39 204-17"/>
+            <g class="roads">
+              <path d="M121 136 536 464"/><path d="M526 127 137 477"/><path d="M76 388 581 170"/><path d="M298 73 370 526"/><path d="M173 85 487 520"/>
+              <circle cx="336" cy="286" r="176"/><circle cx="336" cy="286" r="113"/>
+            </g>
+            <g class="map-node active" data-zone="wuchang" tabindex="0" role="button" aria-label="武昌中心">
+              <circle class="pulse" cx="268" cy="238" r="20"/><circle class="dot" cx="268" cy="238" r="7"/>
+              <path d="M260 234 210 205"/><text x="155" y="196">01</text><text class="node-name" x="155" y="214">武昌中心</text>
+            </g>
+            <g class="map-node" data-zone="guanggu" tabindex="0" role="button" aria-label="光谷东站">
+              <circle class="pulse" cx="460" cy="248" r="20"/><circle class="dot" cx="460" cy="248" r="7"/>
+              <path d="M468 244 518 212"/><text x="524" y="207">02</text><text class="node-name" x="524" y="225">光谷东站</text>
+            </g>
+            <g class="map-node" data-zone="canglongdao" tabindex="0" role="button" aria-label="藏龙岛">
+              <circle class="pulse" cx="493" cy="360" r="20"/><circle class="dot" cx="493" cy="360" r="7"/>
+              <path d="M501 363 545 388"/><text x="549" y="386">03</text><text class="node-name" x="549" y="404">藏龙岛</text>
+            </g>
+            <g class="map-node" data-zone="huangjiahu" tabindex="0" role="button" aria-label="黄家湖">
+              <circle class="pulse" cx="242" cy="438" r="20"/><circle class="dot" cx="242" cy="438" r="7"/>
+              <path d="M234 442 188 474"/><text x="130" y="469">04</text><text class="node-name" x="130" y="487">黄家湖</text>
+            </g>
+            <g class="map-node" data-zone="nanhu" tabindex="0" role="button" aria-label="南湖">
+              <circle class="pulse" cx="316" cy="326" r="20"/><circle class="dot" cx="316" cy="326" r="7"/>
+              <path d="M308 326 259 326"/><text x="213" y="319">05</text><text class="node-name" x="213" y="337">南湖</text>
+            </g>
+            <g class="map-node" data-zone="jiangxia" tabindex="0" role="button" aria-label="江夏">
+              <circle class="pulse" cx="385" cy="462" r="20"/><circle class="dot" cx="385" cy="462" r="7"/>
+              <path d="M392 468 428 497"/><text x="434" y="494">06</text><text class="node-name" x="434" y="512">江夏</text>
+            </g>
+            <g class="map-node" data-zone="qinggong" tabindex="0" role="button" aria-label="轻工大片区">
+              <circle class="pulse" cx="174" cy="153" r="20"/><circle class="dot" cx="174" cy="153" r="7"/>
+              <path d="M166 149 125 122"/><text x="57" y="114">07</text><text class="node-name" x="57" y="132">轻工大片区</text>
+            </g>
+            <g class="map-node planned" data-zone="tangxunhu" tabindex="0" role="button" aria-label="汤逊湖业务拓展中">
+              <circle class="pulse" cx="398" cy="382" r="20"/><circle class="dot" cx="398" cy="382" r="7"/>
+              <path d="M391 387 356 414"/><text x="306" y="411">08</text><text class="node-name" x="306" y="429">汤逊湖</text>
+            </g>
+            <g class="map-node planned" data-zone="yangluo" tabindex="0" role="button" aria-label="阳逻业务拓展中">
+              <circle class="pulse" cx="504" cy="121" r="20"/><circle class="dot" cx="504" cy="121" r="7"/>
+              <path d="M512 117 548 88"/><text x="554" y="83">09</text><text class="node-name" x="554" y="101">阳逻</text>
+            </g>
+          </svg>
+          <div class="coach-drive-scene" id="coachDriveScene" data-zone="wuchang" aria-hidden="true">
+            <div class="drive-lane"><i></i><i></i><span></span></div>
+            <div class="headlight-beam"></div>
+            <div class="training-cones"><i></i><i></i><i></i></div>
+            <img class="coach-car coach-car-render" src="assets/images/coach-car-3d-v1.png" alt="" />
+            <div class="vehicle-spec"><span>TRAINING VEHICLE</span><b>C1 / C2</b><small>新锐片区服务车辆</small></div>
+          </div>
+          <div class="map-card">
+            <div><span>当前选择 CURRENT</span><b id="mapZoneName">武昌中心</b></div>
+            <button id="openSelectedZone" type="button">进入片区 <i>→</i></button>
+          </div>
+          <div class="map-compass"><i>N</i><span></span></div>
+        </div>
+
+        <div class="zone-switcher" aria-label="服务片区快速选择">
+          <span class="zone-title">SELECT<br />YOUR AREA</span>
+          <div class="zone-list">
+            <button class="active" data-zone="wuchang"><small>01</small><b>武昌中心</b><i>WUCHANG</i></button>
+            <button data-zone="guanggu"><small>02</small><b>光谷东站</b><i>OPTICS VALLEY EAST</i></button>
+            <button data-zone="canglongdao"><small>03</small><b>藏龙岛</b><i>CANGLONG ISLAND</i></button>
+            <button data-zone="huangjiahu"><small>04</small><b>黄家湖</b><i>HUANGJIAHU</i></button>
+            <button data-zone="nanhu"><small>05</small><b>南湖</b><i>NANHU</i></button>
+            <button data-zone="jiangxia"><small>06</small><b>江夏</b><i>JIANGXIA</i></button>
+            <button data-zone="qinggong"><small>07</small><b>轻工大片区</b><i>QINGGONG AREA</i></button>
+            <button class="planned" data-zone="tangxunhu"><small>08 · 拓展中</small><b>汤逊湖</b><i>TANGXUNHU</i></button>
+            <button class="planned" data-zone="yangluo"><small>09 · 拓展中</small><b>阳逻</b><i>YANGLO</i></button>
+          </div>
+          <div class="scroll-hint"><span></span> SCROLL TO EXPLORE</div>
+        </div>
+      </section>
+
+      <section class="area-directory" id="areaDirectory" aria-hidden="true">
+        <div class="directory-topbar">
+          <button class="directory-close" id="closeAreaDirectory" type="button"><i>←</i> 返回</button>
+          <span class="topbar-brand"><img src="assets/images/xinrui-logo-transparent-v1.png" alt="" /><b>新锐创想</b><small>XINRUI CREATIVE</small></span>
+          <em>07 ACTIVE · 02 PLANNED</em>
+        </div>
+        <div class="directory-content">
+          <img class="directory-watermark" src="assets/images/xinrui-logo-transparent-v1.png" alt="" />
+          <div class="directory-heading">
+            <div><span>WUHAN SERVICE NETWORK</span><h2>选择你所在的片区</h2></div>
+            <p>从距离、训练场和覆盖高校出发，找到更适合你的学车选择。</p>
+          </div>
+          <div class="directory-grid" id="areaDirectoryGrid"></div>
+        </div>
+      </section>
+
+      <section class="region-section" id="regions" aria-hidden="true">
+        <div class="region-topbar">
+          <button class="region-back" id="closeRegion" type="button"><i>←</i> 返回武汉地图</button>
+          <span class="topbar-brand"><img src="assets/images/xinrui-logo-transparent-v1.png" alt="" /><b>新锐创想</b><small>XINRUI CREATIVE</small></span>
+          <div class="region-actions">
+            <button id="switchRegion" type="button">切换片区 <i>⌄</i></button>
+            <button class="region-consult" type="button">联系负责人 <i>↗</i></button>
+          </div>
+        </div>
+        <div class="region-header">
+          <div class="region-copy">
+            <div class="section-label dark"><span>02</span><i></i> AREA SERVICE CENTER</div>
+            <div class="region-heading">
+              <small>当前片区 / CURRENT AREA</small>
+              <h2 id="regionName">武昌中心</h2>
+              <span class="region-status" id="regionStatus">已开展服务</span>
+            </div>
+            <p id="regionIntro">以鑫恺源驾校总部为服务中心，覆盖武昌核心高校，并延伸服务至汉阳校区。</p>
+            <div class="manager-card manager-inline">
+              <div class="manager-avatar" id="managerAvatar">WC</div>
+              <div><small>片区负责人</small><b id="managerName">武昌片区负责人</b><span>联系方式待补充</span></div>
+              <button aria-label="联系片区负责人">↗</button>
+            </div>
+          </div>
+          <div class="region-vehicle">
+            <span>TRAINING VEHICLE · C1 / C2</span>
+            <img class="region-car" src="assets/images/coach-car-3d-v1.png" alt="白色教练车" />
+          </div>
+        </div>
+        <div class="region-layout">
+          <div class="school-preview">
+            <div class="preview-top"><span>片区驾校与高校覆盖</span><b><i id="schoolCount">01</i> PARTNER SCHOOLS</b></div>
+            <div class="school-directory" id="schoolDirectory" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-strip" id="service">
+        <div><span>01</span><b>实地核验</b><p>合作场地现场考察</p></div>
+        <div><span>02</span><b>区域负责</b><p>每个片区专人服务</p></div>
+        <div><span>03</span><b>透明对比</b><p>班型与费用清晰说明</p></div>
+        <div><span>04</span><b>预约看场</b><p>满意后再决定报名</p></div>
+      </section>
+    </main>
+
+    <footer id="about">
+      <div><span class="footer-symbol">X</span><h2>让武汉学车选择，<br />从此更有方向。</h2></div>
+      <div class="footer-wordmark">新锐创想<small>XINRUI CREATIVE · WUHAN</small></div>
+      <span>© 2026 武汉市新锐创想营销策划有限公司</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
