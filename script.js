@@ -134,6 +134,71 @@ let activeZoneKey = "wuchang";
 let areaOpenedByPush = false;
 const regionSection = document.querySelector("#regions");
 const areaDirectory = document.querySelector("#areaDirectory");
+const advantagesSection = document.querySelector("#advantagesSection");
+
+const advantageDetails = {
+  near: {
+    index: "01",
+    title: "离校更近",
+    description: "利用没课、周末和考试周后的空闲时间练车，不必为了练车专门跨区往返。"
+  },
+  clear: {
+    index: "02",
+    title: "收费透明",
+    description: "报名前讲清费用由谁收取、包含哪些项目，也说明后续可能发生的考试与模拟费用。"
+  },
+  fit: {
+    index: "03",
+    title: "班型匹配",
+    description: "结合学生的预算、学习能力和时间安排推荐方案，不用低价吸引后再不断增加项目。"
+  },
+  steady: {
+    index: "04",
+    title: "全程有人负责",
+    description: "预约、练车、教练沟通和考试安排出现问题时，有明确片区负责人继续协调处理。"
+  }
+};
+
+function setAdvantageFocus(key) {
+  const detail = advantageDetails[key];
+  if (!detail) return;
+  document.querySelectorAll("#advantageKeywords [data-advantage]").forEach(button => {
+    button.classList.toggle("active", button.dataset.advantage === key);
+  });
+  const focus = document.querySelector(".value-focus");
+  focus.classList.remove("refresh");
+  void focus.offsetWidth;
+  document.querySelector("#advantageIndex").textContent = detail.index;
+  document.querySelector("#advantageTitle").textContent = detail.title;
+  document.querySelector("#advantageDescription").textContent = detail.description;
+  focus.classList.add("refresh");
+}
+
+function setAdvantageScene(scene) {
+  const target = scene === "campus" ? "campus" : "value";
+  advantagesSection.dataset.scene = target;
+  document.querySelectorAll("[data-advantage-scene]").forEach(panel => {
+    panel.classList.toggle("is-active", panel.dataset.advantageScene === target);
+  });
+  document.querySelectorAll("[data-advantage-target]").forEach(button => {
+    button.classList.toggle("active", button.dataset.advantageTarget === target);
+  });
+  document.querySelector("#advantageProgress").textContent = target === "value" ? "01" : "02";
+}
+
+function openAdvantages(scene = "value") {
+  setAdvantageScene(scene);
+  advantagesSection.classList.add("open");
+  advantagesSection.setAttribute("aria-hidden", "false");
+  document.body.classList.add("advantages-open");
+  window.setTimeout(() => document.querySelector("#closeAdvantages").focus({ preventScroll: true }), 520);
+}
+
+function closeAdvantages() {
+  advantagesSection.classList.remove("open");
+  advantagesSection.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("advantages-open");
+}
 
 function selectZone(key) {
   const zone = zones[key];
@@ -248,6 +313,8 @@ document.querySelectorAll(".map-node[data-zone]").forEach(node => {
 
 document.querySelector("#openSelectedZone").addEventListener("click", () => openRegion(activeZoneKey));
 document.querySelector("#enterCurrentZone").addEventListener("click", openAreaDirectory);
+document.querySelector("#openAdvantages").addEventListener("click", () => openAdvantages("value"));
+document.querySelector("#navOpenAdvantages").addEventListener("click", () => openAdvantages("value"));
 document.querySelector("#navOpenAreas").addEventListener("click", openAreaDirectory);
 document.querySelector("#headerConsult").addEventListener("click", () => {
   openRegion(activeZoneKey);
@@ -256,6 +323,18 @@ document.querySelector("#headerConsult").addEventListener("click", () => {
 document.querySelector("#closeRegion").addEventListener("click", () => closeRegion());
 document.querySelector("#switchRegion").addEventListener("click", openAreaDirectory);
 document.querySelector("#closeAreaDirectory").addEventListener("click", closeAreaDirectory);
+document.querySelector("#closeAdvantages").addEventListener("click", closeAdvantages);
+document.querySelector("#advantageKeywords").addEventListener("click", event => {
+  const button = event.target.closest("[data-advantage]");
+  if (button) setAdvantageFocus(button.dataset.advantage);
+});
+document.querySelectorAll("[data-advantage-target]").forEach(button => {
+  button.addEventListener("click", () => setAdvantageScene(button.dataset.advantageTarget));
+});
+document.querySelector("#advantagesOpenAreas").addEventListener("click", () => {
+  closeAdvantages();
+  openAreaDirectory();
+});
 document.querySelector("#areaDirectoryGrid").addEventListener("click", event => {
   const card = event.target.closest(".directory-card");
   if (!card) return;
@@ -291,9 +370,11 @@ renderAreaDirectory();
 selectZone(initialZoneKey);
 if (zones[hashZoneKey]) requestAnimationFrame(() => openRegion(hashZoneKey, false));
 else if (params.get("view") === "areas") requestAnimationFrame(openAreaDirectory);
+else if (params.get("view") === "advantages") requestAnimationFrame(() => openAdvantages(params.get("scene")));
 
 window.addEventListener("popstate", () => {
   closeAreaDirectory();
+  closeAdvantages();
   const key = location.hash.startsWith("#area/") ? location.hash.slice(6) : "";
   areaOpenedByPush = false;
   if (zones[key]) openRegion(key, false);
@@ -304,6 +385,7 @@ document.addEventListener("keydown", event => {
   if (event.key !== "Escape") return;
   if (areaDirectory.classList.contains("open")) closeAreaDirectory();
   else if (regionSection.classList.contains("open")) closeRegion();
+  else if (advantagesSection.classList.contains("open")) closeAdvantages();
 });
 
 const mapPanel = document.querySelector(".map-panel");

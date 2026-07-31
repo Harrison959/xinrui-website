@@ -45,6 +45,7 @@
       </a>
       <nav aria-label="主导航">
         <a class="active" href="#home">首页</a>
+        <button id="navOpenAdvantages" type="button">为什么新锐</button>
         <button id="navOpenAreas" type="button">服务片区</button>
         <span>武汉驾校服务网络</span>
       </nav>
@@ -61,7 +62,7 @@
           <p>以大学城为中心，辐射周边正规合作驾校。真实场地可看，专属片区负责人为你提供选校与报名服务。</p>
           <div class="hero-actions">
             <button class="primary-action" id="enterCurrentZone" type="button">选择服务片区 <i>↗</i></button>
-            <button class="play-action"><span>▶</span> 了解新锐服务</button>
+            <button class="play-action" id="openAdvantages" type="button"><span>＋</span> 了解新锐服务</button>
           </div>
           <div class="hero-metrics">
             <div><b>07</b><span>已开展服务片区<br />ACTIVE AREAS</span></div>
@@ -149,6 +150,82 @@
             <button class="planned" data-zone="yangluo"><small>09 · 拓展中</small><b>阳逻</b><i>YANGLO</i></button>
           </div>
           <div class="scroll-hint"><span></span> SCROLL TO EXPLORE</div>
+        </div>
+      </section>
+
+      <section class="advantages-section" id="advantagesSection" aria-hidden="true">
+        <div class="advantages-topbar">
+          <button class="advantages-close" id="closeAdvantages" type="button"><i>←</i> 返回首页</button>
+          <span class="topbar-brand"><img src="assets/images/xinrui-logo-transparent-v1.png" alt="" /><b>新锐创想</b><small>XINRUI CREATIVE</small></span>
+          <em><b id="advantageProgress">01</b> / 02</em>
+        </div>
+
+        <div class="advantages-scenes">
+          <article class="advantage-scene value-scene is-active" data-advantage-scene="value">
+            <div class="advantage-grid"></div>
+            <img class="advantage-watermark" src="assets/images/xinrui-logo-transparent-v1.png" alt="" />
+            <div class="value-copy">
+              <div class="section-label"><span>03</span><i></i> WHY XINRUI</div>
+              <small>OUR VALUE / 我们的价值</small>
+              <h2>不是最低价，<br />是离你<span>更近</span>，<br />把话<span>说清</span>。</h2>
+              <p>选驾校不靠低价诱导。先看场地、看收费、看班型，也看遇到问题后究竟由谁负责。</p>
+              <div class="value-proof"><span>实地看场</span><span>高校学生服务</span><span>问题升级处理</span></div>
+            </div>
+
+            <div class="value-stage">
+              <div class="value-keywords" id="advantageKeywords" aria-label="新锐创想核心优势">
+                <button class="active" data-advantage="near" type="button"><b>近</b><small>NEAR</small></button>
+                <button data-advantage="clear" type="button"><b>透</b><small>CLEAR</small></button>
+                <button data-advantage="fit" type="button"><b>配</b><small>MATCH</small></button>
+                <button data-advantage="steady" type="button"><b>稳</b><small>RESPONSIBLE</small></button>
+              </div>
+              <div class="value-focus">
+                <small><b id="advantageIndex">01</b> / VALUE FOCUS</small>
+                <h3 id="advantageTitle">离校更近</h3>
+                <p id="advantageDescription">利用没课、周末和考试周后的空闲时间练车，不必为了练车专门跨区往返。</p>
+                <div><i></i><span>点击关键词切换</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="advantage-scene campus-scene" data-advantage-scene="campus">
+            <div class="advantage-grid"></div>
+            <div class="campus-copy">
+              <div class="section-label"><span>04</span><i></i> CAMPUS DRIVING</div>
+              <small>WHY LEARN NEAR CAMPUS / 为什么在学校学车</small>
+              <h2>学车不必，<br />占掉一个<span>暑假</span>。</h2>
+              <p>真正的优势不是“大学更闲”，而是距离近以后，时间选择更多，学习节奏也更连续。</p>
+              <div class="campus-benefits">
+                <div><b>连续</b><span>跨学期稳定推进</span></div>
+                <div><b>碎片</b><span>空课与周末可利用</span></div>
+                <div><b>少折返</b><span>不用为练车反复回家</span></div>
+                <div><b>同校</b><span>真实学员互相参考</span></div>
+                <div><b>就近</b><span>预约沟通更易协调</span></div>
+                <div><b>提前</b><span>为实习毕业留出时间</span></div>
+              </div>
+            </div>
+
+            <div class="schedule-stage" aria-label="大学课程表与练车时间示意">
+              <div class="schedule-meta"><span>WEEK 09 · CAMPUS SCHEDULE</span><em>AVAILABLE TRAINING TIME</em></div>
+              <div class="schedule-board">
+                <div class="schedule-head"><span>TIME</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span></div>
+                <div class="schedule-row"><small>08:00</small><i>专业课</i><b>空课 · 可练</b><i>英语</i><b>空课 · 可练</b><i>专业课</i></div>
+                <div class="schedule-row"><small>10:00</small><i>高数</i><b>空课 · 可练</b><i>专业课</i><b>空课 · 可练</b><i>体育</i></div>
+                <div class="schedule-row"><small>14:00</small><b>空课 · 可练</b><i>选修课</i><b>空课 · 可练</b><i>专业课</i><b>空课 · 可练</b></div>
+                <div class="schedule-row"><small>16:00</small><i>社团</i><i>自习</i><b>空课 · 可练</b><i>自习</i><b>空课 · 可练</b></div>
+              </div>
+              <div class="campus-route"><span>SCHOOL</span><i></i><em>距离近，时间选择才更多</em><i></i><span>FIELD</span></div>
+              <img class="schedule-car" src="assets/images/coach-car-3d-v1.png" alt="白色教练车" />
+            </div>
+          </article>
+        </div>
+
+        <div class="advantages-controls">
+          <div>
+            <button class="active" data-advantage-target="value" type="button"><span>01</span>我们的优势</button>
+            <button data-advantage-target="campus" type="button"><span>02</span>在校学车</button>
+          </div>
+          <button class="advantages-area-cta" id="advantagesOpenAreas" type="button">选择服务片区 <i>↗</i></button>
         </div>
       </section>
 
