@@ -168,3 +168,32 @@ body.advantages-open{overflow:hidden}.play-action{display:inline-flex!important;
 
 @media(max-width:370px){.hero-copy h1{font-size:41px}.value-copy h2,.campus-copy h2{font-size:36px}.campus-benefits span{font-size:5px}.directory-heading p{display:none}.directory-heading{margin-bottom:10px}.advantages-controls>div button{min-width:86px}.advantages-area-cta{min-width:110px}}
 @media(max-width:700px){.schedule-stage{height:260px}.mobile-timeline>div{min-height:31px}.campus-route{bottom:18px}.schedule-car{width:150px;right:-2%;bottom:0;z-index:2}}
+
+/* Mobile WebView stability: avoid clipped transparent PNGs and GPU layer tearing. */
+@keyframes mobileCoachDriveIn{from{opacity:0;transform:translate3d(54px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes mobileScheduleCarIn{from{opacity:0;transform:translate3d(38px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@media(max-width:700px){
+  .site-header,.mobile-bottom-nav,.advantages-topbar,.advantages-controls,.directory-topbar,.region-topbar,.school-card{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .site-header{background:rgba(4,13,21,.98)}.mobile-bottom-nav{background:rgba(2,9,15,.985)}.advantages-topbar,.advantages-controls,.directory-topbar{background:rgba(3,11,18,.985)}.region-topbar{background:rgba(247,250,252,.985)}.school-card{background:#fff}
+
+  .advantages-section,.area-directory,.region-section{transition-duration:.46s;box-shadow:none}
+  .advantages-section.open,.area-directory.open,.region-section.open{transition-duration:.46s}
+  .advantage-scene{transform:none;transition:opacity .24s ease,visibility 0s .24s}
+  .advantage-scene.is-active{transform:none;transition:opacity .3s ease,visibility 0s}
+
+  .coach-drive-scene{isolation:isolate;opacity:1;transform:none;animation:mobileCoachDriveIn .86s .16s cubic-bezier(.22,1,.36,1) both}
+  .coach-drive-scene:before{content:"";position:absolute;inset:0;z-index:4;background:url("assets/images/coach-car-3d-v1.png") center 48%/100% auto no-repeat;pointer-events:none}
+  .coach-car-render{display:none}.drive-lane{z-index:1}.coach-drive-scene:after{z-index:2}.headlight-beam{z-index:0;filter:none}.training-cones{z-index:6}
+
+  .region-header{grid-template-columns:minmax(0,.92fr) minmax(150px,1.08fr)}
+  .region-vehicle{isolation:isolate;overflow:visible;background:url("assets/images/coach-car-3d-v1.png") 42% 50%/124% auto no-repeat}
+  .region-vehicle:before{z-index:-1}.region-car{visibility:hidden;filter:none!important;transform:none!important}
+
+  .schedule-stage:after{content:"";position:absolute;width:150px;height:86px;right:-2px;bottom:-1px;z-index:2;background:url("assets/images/coach-car-3d-v1.png") center/100% auto no-repeat;opacity:0;pointer-events:none}
+  .campus-scene.is-active .schedule-stage:after{animation:mobileScheduleCarIn .72s .2s cubic-bezier(.22,1,.36,1) forwards}
+  .schedule-car{display:none}.mobile-timeline{position:relative;z-index:3}.campus-route{z-index:3;right:126px}
+
+  .value-keywords,.directory-grid{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .directory-page{scroll-snap-stop:always;contain:layout paint}
+}
+@media(max-width:700px) and (prefers-reduced-motion:reduce){.coach-drive-scene{animation:none}.schedule-stage:after{animation:none!important;opacity:1}}
