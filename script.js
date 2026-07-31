@@ -136,6 +136,12 @@ const regionSection = document.querySelector("#regions");
 const areaDirectory = document.querySelector("#areaDirectory");
 const advantagesSection = document.querySelector("#advantagesSection");
 
+function setMobileNavActive(target) {
+  document.querySelectorAll("#mobileBottomNav button").forEach(button => {
+    button.classList.toggle("active", button.id === `mobileNav${target[0].toUpperCase()}${target.slice(1)}`);
+  });
+}
+
 const advantageDetails = {
   near: {
     index: "01",
@@ -191,6 +197,7 @@ function openAdvantages(scene = "value") {
   advantagesSection.classList.add("open");
   advantagesSection.setAttribute("aria-hidden", "false");
   document.body.classList.add("advantages-open");
+  setMobileNavActive("advantages");
   window.setTimeout(() => document.querySelector("#closeAdvantages").focus({ preventScroll: true }), 520);
 }
 
@@ -198,6 +205,7 @@ function closeAdvantages() {
   advantagesSection.classList.remove("open");
   advantagesSection.setAttribute("aria-hidden", "true");
   document.body.classList.remove("advantages-open");
+  if (!areaDirectory.classList.contains("open") && !regionSection.classList.contains("open")) setMobileNavActive("home");
 }
 
 function selectZone(key) {
@@ -224,7 +232,7 @@ function selectZone(key) {
 }
 
 function renderAreaDirectory() {
-  document.querySelector("#areaDirectoryGrid").innerHTML = Object.entries(zones).map(([key, zone], index) => {
+  const cards = Object.entries(zones).map(([key, zone], index) => {
     const campusCount = zone.schools.reduce((total, school) => total + school.campuses.length, 0);
     const schoolNames = zone.schools.length ? zone.schools.map(school => school.name).join(" · ") : "合作驾校筹备中";
     return `<button class="directory-card ${zone.status === "planned" ? "planned" : ""}" data-zone="${key}" type="button">
@@ -234,13 +242,26 @@ function renderAreaDirectory() {
       <p>${schoolNames}</p>
       <div><b>${zone.schools.length || "—"}<small> 驾校</small></b><b>${campusCount || "—"}<small> 高校</small></b><i>↗</i></div>
     </button>`;
-  }).join("");
+  });
+  const pages = [];
+  for (let index = 0; index < cards.length; index += 3) {
+    pages.push(`<div class="directory-page">${cards.slice(index, index + 3).join("")}</div>`);
+  }
+  document.querySelector("#areaDirectoryGrid").innerHTML = pages.join("");
+  document.querySelector("#directoryPagination").innerHTML = pages.map((_, index) =>
+    `<button class="${index === 0 ? "active" : ""}" data-directory-page="${index}" type="button" aria-label="第${index + 1}页"></button>`
+  ).join("");
 }
 
 function openAreaDirectory() {
   areaDirectory.classList.add("open");
   areaDirectory.setAttribute("aria-hidden", "false");
   document.body.classList.add("directory-open");
+  setMobileNavActive("areas");
+  if (matchMedia("(max-width:700px)").matches) {
+    document.querySelector("#areaDirectoryGrid").scrollTo({ left: 0, behavior: "auto" });
+    document.querySelectorAll("#directoryPagination button").forEach((button, index) => button.classList.toggle("active", index === 0));
+  }
   window.setTimeout(() => document.querySelector("#closeAreaDirectory").focus({ preventScroll: true }), 480);
 }
 
@@ -248,6 +269,8 @@ function closeAreaDirectory() {
   areaDirectory.classList.remove("open");
   areaDirectory.setAttribute("aria-hidden", "true");
   document.body.classList.remove("directory-open");
+  if (regionSection.classList.contains("open")) setMobileNavActive("areas");
+  else if (!advantagesSection.classList.contains("open")) setMobileNavActive("home");
 }
 
 function openRegion(key, pushHistory = true) {
@@ -256,6 +279,7 @@ function openRegion(key, pushHistory = true) {
   regionSection.classList.add("open");
   regionSection.setAttribute("aria-hidden", "false");
   document.body.classList.add("region-open");
+  setMobileNavActive("areas");
   if (pushHistory) {
     history.pushState({ area: key }, "", `${location.pathname}${location.search}#area/${key}`);
     areaOpenedByPush = true;
@@ -267,6 +291,7 @@ function closeRegion(updateHistory = true) {
   regionSection.classList.remove("open");
   regionSection.setAttribute("aria-hidden", "true");
   document.body.classList.remove("region-open");
+  if (!areaDirectory.classList.contains("open") && !advantagesSection.classList.contains("open")) setMobileNavActive("home");
   if (!updateHistory) return;
   if (areaOpenedByPush) {
     areaOpenedByPush = false;
@@ -326,7 +351,10 @@ document.querySelector("#closeAreaDirectory").addEventListener("click", closeAre
 document.querySelector("#closeAdvantages").addEventListener("click", closeAdvantages);
 document.querySelector("#advantageKeywords").addEventListener("click", event => {
   const button = event.target.closest("[data-advantage]");
-  if (button) setAdvantageFocus(button.dataset.advantage);
+  if (button) {
+    setAdvantageFocus(button.dataset.advantage);
+    if (matchMedia("(max-width:700px)").matches) button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }
 });
 document.querySelectorAll("[data-advantage-target]").forEach(button => {
   button.addEventListener("click", () => setAdvantageScene(button.dataset.advantageTarget));
@@ -347,6 +375,62 @@ document.querySelector("#areaDirectoryGrid").addEventListener("click", event => 
     closeAreaDirectory();
     openRegion(key);
   }
+});
+
+let keywordScrollTimer;
+document.querySelector("#advantageKeywords").addEventListener("scroll", event => {
+  if (!matchMedia("(max-width:700px)").matches) return;
+  const track = event.currentTarget;
+  window.clearTimeout(keywordScrollTimer);
+  keywordScrollTimer = window.setTimeout(() => {
+    const buttons = [...track.querySelectorAll("[data-advantage]")];
+    const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+    const closest = buttons.reduce((best, button) => {
+      const rect = button.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - trackCenter);
+      return !best || distance < best.distance ? { button, distance } : best;
+    }, null);
+    if (closest) setAdvantageFocus(closest.button.dataset.advantage);
+  }, 90);
+}, { passive: true });
+
+let directoryScrollTimer;
+document.querySelector("#areaDirectoryGrid").addEventListener("scroll", event => {
+  if (!matchMedia("(max-width:700px)").matches) return;
+  const track = event.currentTarget;
+  window.clearTimeout(directoryScrollTimer);
+  directoryScrollTimer = window.setTimeout(() => {
+    const page = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+    document.querySelectorAll("#directoryPagination button").forEach((button, index) => button.classList.toggle("active", index === page));
+  }, 70);
+}, { passive: true });
+
+document.querySelector("#directoryPagination").addEventListener("click", event => {
+  const button = event.target.closest("[data-directory-page]");
+  if (!button) return;
+  const track = document.querySelector("#areaDirectoryGrid");
+  track.scrollTo({ left: Number(button.dataset.directoryPage) * track.clientWidth, behavior: "smooth" });
+});
+
+document.querySelector("#mobileNavHome").addEventListener("click", () => {
+  closeAreaDirectory();
+  closeAdvantages();
+  if (regionSection.classList.contains("open")) closeRegion();
+  setMobileNavActive("home");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+document.querySelector("#mobileNavAdvantages").addEventListener("click", () => {
+  closeAreaDirectory();
+  if (regionSection.classList.contains("open")) {
+    closeRegion(false);
+    areaOpenedByPush = false;
+    history.replaceState(null, "", `${location.pathname}${location.search}`);
+  }
+  openAdvantages("value");
+});
+document.querySelector("#mobileNavAreas").addEventListener("click", () => {
+  closeAdvantages();
+  openAreaDirectory();
 });
 
 function focusManager() {

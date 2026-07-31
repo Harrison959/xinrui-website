@@ -183,7 +183,7 @@
                 <small><b id="advantageIndex">01</b> / VALUE FOCUS</small>
                 <h3 id="advantageTitle">离校更近</h3>
                 <p id="advantageDescription">利用没课、周末和考试周后的空闲时间练车，不必为了练车专门跨区往返。</p>
-                <div><i></i><span>点击关键词切换</span></div>
+                <div><i></i><span>点击或左右滑动切换</span></div>
               </div>
             </div>
           </article>
@@ -214,6 +214,13 @@
                 <div class="schedule-row"><small>14:00</small><b>空课 · 可练</b><i>选修课</i><b>空课 · 可练</b><i>专业课</i><b>空课 · 可练</b></div>
                 <div class="schedule-row"><small>16:00</small><i>社团</i><i>自习</i><b>空课 · 可练</b><i>自习</i><b>空课 · 可练</b></div>
               </div>
+              <div class="mobile-timeline" aria-label="手机端可练车时间轴">
+                <div><time>08:00</time><span>专业课</span></div>
+                <div class="available"><time>10:00</time><span><b>空课</b>可以安排练车</span></div>
+                <div><time>14:00</time><span>选修课</span></div>
+                <div class="available"><time>16:00</time><span><b>空课</b>可以安排练车</span></div>
+                <div class="available"><time>周末</time><span><b>集中训练</b>按自己的节奏推进</span></div>
+              </div>
               <div class="campus-route"><span>SCHOOL</span><i></i><em>距离近，时间选择才更多</em><i></i><span>FIELD</span></div>
               <img class="schedule-car" src="assets/images/coach-car-3d-v1.png" alt="白色教练车" />
             </div>
@@ -242,6 +249,7 @@
             <p>从距离、训练场和覆盖高校出发，找到更适合你的学车选择。</p>
           </div>
           <div class="directory-grid" id="areaDirectoryGrid"></div>
+          <div class="directory-pagination" id="directoryPagination" aria-label="片区目录分页"></div>
         </div>
       </section>
 
@@ -289,6 +297,12 @@
         <div><span>04</span><b>预约看场</b><p>满意后再决定报名</p></div>
       </section>
     </main>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="手机端主导航">
+      <button class="active" id="mobileNavHome" type="button"><i>⌂</i><span>首页</span></button>
+      <button id="mobileNavAdvantages" type="button"><i>◇</i><span>优势</span></button>
+      <button id="mobileNavAreas" type="button"><i>◎</i><span>片区</span></button>
+    </nav>
 
     <footer id="about">
       <div><span class="footer-symbol">X</span><h2>让武汉学车选择，<br />从此更有方向。</h2></div>
