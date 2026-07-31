@@ -135,6 +135,17 @@ let areaOpenedByPush = false;
 const regionSection = document.querySelector("#regions");
 const areaDirectory = document.querySelector("#areaDirectory");
 const advantagesSection = document.querySelector("#advantagesSection");
+const regionVehicle = document.querySelector(".region-vehicle");
+let regionVehicleTimer;
+
+function playRegionVehicleEntrance(delay = 0) {
+  window.clearTimeout(regionVehicleTimer);
+  regionVehicleTimer = window.setTimeout(() => {
+    regionVehicle.classList.remove("vehicle-entering");
+    void regionVehicle.offsetWidth;
+    regionVehicle.classList.add("vehicle-entering");
+  }, delay);
+}
 
 function setMobileNavActive(target) {
   document.querySelectorAll("#mobileBottomNav button").forEach(button => {
@@ -279,6 +290,7 @@ function openRegion(key, pushHistory = true) {
   regionSection.classList.add("open");
   regionSection.setAttribute("aria-hidden", "false");
   document.body.classList.add("region-open");
+  playRegionVehicleEntrance(90);
   setMobileNavActive("areas");
   if (pushHistory) {
     history.pushState({ area: key }, "", `${location.pathname}${location.search}#area/${key}`);
@@ -371,6 +383,7 @@ document.querySelector("#areaDirectoryGrid").addEventListener("click", event => 
     selectZone(key);
     history.replaceState({ area: key }, "", `${location.pathname}${location.search}#area/${key}`);
     closeAreaDirectory();
+    playRegionVehicleEntrance(100);
   } else {
     closeAreaDirectory();
     openRegion(key);

@@ -197,3 +197,17 @@ body.advantages-open{overflow:hidden}.play-action{display:inline-flex!important;
   .directory-page{scroll-snap-stop:always;contain:layout paint}
 }
 @media(max-width:700px) and (prefers-reduced-motion:reduce){.coach-drive-scene{animation:none}.schedule-stage:after{animation:none!important;opacity:1}}
+
+/* Region arrival: the training car enters once and parks inside its own visual bay. */
+@keyframes regionCarDriveIn{0%{opacity:0;transform:translate3d(118%,3%,0) scale(.94)}58%{opacity:1;transform:translate3d(-2.4%,0,0) scale(1.012)}78%{opacity:1;transform:translate3d(1.1%,0,0) scale(.997)}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes regionVehicleGlow{0%,24%{opacity:.12;transform:scale(.72)}68%{opacity:.9;transform:scale(1.06)}100%{opacity:.55;transform:scale(1)}}
+.region-vehicle.vehicle-entering .region-car{animation:regionCarDriveIn 1.08s .04s cubic-bezier(.2,.78,.2,1) both}
+.region-vehicle.vehicle-entering:before{animation:regionVehicleGlow 1.15s ease-out both}
+.region-vehicle>span{z-index:3}
+
+@media(max-width:700px){
+  .region-vehicle{overflow:hidden;background:none}
+  .region-vehicle:after{content:"";position:absolute;inset:0 -12%;z-index:1;background:url("assets/images/coach-car-3d-v1.png") center/124% auto no-repeat;opacity:1;pointer-events:none}
+  .region-vehicle.vehicle-entering:after{animation:regionCarDriveIn 1s .04s cubic-bezier(.2,.78,.2,1) both}
+}
+@media(prefers-reduced-motion:reduce){.region-vehicle.vehicle-entering .region-car,.region-vehicle.vehicle-entering:after,.region-vehicle.vehicle-entering:before{animation:none!important;opacity:1;transform:none}}
