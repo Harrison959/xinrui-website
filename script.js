@@ -137,6 +137,23 @@ const areaDirectory = document.querySelector("#areaDirectory");
 const advantagesSection = document.querySelector("#advantagesSection");
 const regionVehicle = document.querySelector(".region-vehicle");
 let regionVehicleTimer;
+const siteHeader = document.querySelector(".site-header");
+const menuButton = document.querySelector(".menu-button");
+
+function closeTabletMenu() {
+  siteHeader.classList.remove("menu-open");
+  document.body.classList.remove("tablet-menu-open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "打开菜单");
+}
+
+function toggleTabletMenu() {
+  const willOpen = !siteHeader.classList.contains("menu-open");
+  siteHeader.classList.toggle("menu-open", willOpen);
+  document.body.classList.toggle("tablet-menu-open", willOpen);
+  menuButton.setAttribute("aria-expanded", String(willOpen));
+  menuButton.setAttribute("aria-label", willOpen ? "关闭菜单" : "打开菜单");
+}
 
 function playRegionVehicleEntrance(delay = 0) {
   window.clearTimeout(regionVehicleTimer);
@@ -353,6 +370,14 @@ document.querySelector("#enterCurrentZone").addEventListener("click", openAreaDi
 document.querySelector("#openAdvantages").addEventListener("click", () => openAdvantages("value"));
 document.querySelector("#navOpenAdvantages").addEventListener("click", () => openAdvantages("value"));
 document.querySelector("#navOpenAreas").addEventListener("click", openAreaDirectory);
+menuButton.addEventListener("click", toggleTabletMenu);
+document.querySelector("#primaryNav").addEventListener("click", event => {
+  if (event.target.closest("a,button")) closeTabletMenu();
+});
+document.querySelector("#menuConsult").addEventListener("click", () => {
+  openRegion(activeZoneKey);
+  window.setTimeout(focusManager, 760);
+});
 document.querySelector("#headerConsult").addEventListener("click", () => {
   openRegion(activeZoneKey);
   window.setTimeout(focusManager, 760);
@@ -480,9 +505,14 @@ window.addEventListener("popstate", () => {
 
 document.addEventListener("keydown", event => {
   if (event.key !== "Escape") return;
-  if (areaDirectory.classList.contains("open")) closeAreaDirectory();
+  if (siteHeader.classList.contains("menu-open")) closeTabletMenu();
+  else if (areaDirectory.classList.contains("open")) closeAreaDirectory();
   else if (regionSection.classList.contains("open")) closeRegion();
   else if (advantagesSection.classList.contains("open")) closeAdvantages();
+});
+
+window.addEventListener("resize", () => {
+  if (!matchMedia("(min-width:701px) and (max-width:1050px)").matches) closeTabletMenu();
 });
 
 const mapPanel = document.querySelector(".map-panel");
